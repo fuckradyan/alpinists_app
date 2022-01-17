@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h3 class="d-inline"> Таблица Climbing </h3> <a type="button" href="{{url_for('eachtable',tablename='Climbing')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  climbings %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  <h3 class="d-inline"> Таблица Group </h3>  <a type="button" href="{{url_for('eachtable',tablename='Group')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  groups %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  <h3 class="d-inline"> Таблица Human </h3>  <a type="button" href="{{url_for('eachtable',tablename='Human')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  human %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  <h3 class="d-inline"> Таблица Address </h3>  <a type="button" href="{{url_for('eachtable',tablename='Address')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  addresses %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  <h3 class="d-inline"> Таблица Human in Group</h3>  <a type="button" href="{{url_for('eachtable',tablename='Human in Group')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  hig %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  <h3 class="d-inline"> Таблица Mountain</h3>  <a type="button" href="{{url_for('eachtable',tablename='Mountain')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  mountains %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  <h3 class="d-inline"> Таблица Country </h3>  <a type="button" href="{{url_for('eachtable',tablename='Country')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  countries %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  <h3 class="d-inline"> Таблица Region </h3>  <a type="button" href="{{url_for('eachtable',tablename='Region')}}" class="btn btn-primary d-inline">Перейти к таблице</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Название столбца</th>
+        <th scope="col">Тип</th>
+        <th scope="col">IS NULLABLE</th>
+        <th scope="col">COLUMNL KEY</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cl in  regions %}
+      <tr>
+        <th scope="row">{{cl.COLUMN_NAME}}</th>
+        <td>{{cl.DATA_TYPE}}</td>
+        <td>{{cl.IS_NULLABLE}}</td>
+        <td>{{cl.COLUMN_KEY}}</td>
+      </tr>
+
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  {% endblock %}
