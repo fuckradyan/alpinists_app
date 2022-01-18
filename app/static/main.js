@@ -151,6 +151,26 @@ $('#task7').click(function(){
         $('#task7table').append(table);
     })  
 })
+//// task 8 
+url = locateOrigin + '/getmountains'
+sendRequest(url,'GET', function(){
+    for(i=0;i<this.response.length;i++){
+        $('#mtn-id').append($('<option>', {
+            value: this.response[i][0],
+            text: `${this.response[i][1]}, ${this.response[i][2]}m`
+        }));
+    }
+})
+$('#task8').click(function(){
+    let url= locateOrigin + '/task8' + '?' +'start=' + $('#start-date1').val() + '&end=' + $('#end-date1').val() + '&mountain_id=' + $('#mtn-id').val()  + '&group_id=' + $('#groups').val() 
+    sendRequest(url,'GET', function(){
+        if(this.responce==="ok"){
+            showSwal('auto-close');
+        }else{
+            showSwal('');
+        }
+    })
+})
 }
 
 
