@@ -170,7 +170,7 @@ def task3():
         cursor.execute("UPDATE `Mountain` SET `name`=%s, `height`=%s, `region_id`=%s WHERE id=%s;",(name,height,region_id,id,))
         mysql.connection.commit()
         cursor.close()
-        return jsonify('ok')
+        return jsonify("ok")
     return jsonify('not ok')
 
 @app.route('/task4')
@@ -190,3 +190,52 @@ def task4():
 #     roles = cursor.fetchall()
 #     cursor.close()
 #     return roles
+@app.route('/getgroups')
+def getgroups():
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT * FROM `Group`',)  
+    fetched = cursor.fetchall()
+    cursor.close()
+    return jsonify(fetched)
+
+@app.route('/getaddresses')
+def getaddresses():
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT * FROM `Address`',)  
+    fetched = cursor.fetchall()
+    cursor.close()
+    return jsonify(fetched)
+@app.route('/addhumaningroup')
+def addhumaningroup():
+    first_name = request.args.get('first_name')
+    last_name = request.args.get('last_name')
+    address_id = request.args.get('address_id',type=int)
+    group_id = request.args.get('group_id',type=int)
+    print(first_name,last_name, address_id, group_id)
+    try:
+        cursor =  mysql.connection.cursor(named_tuple=True)
+        cursor.execute('INSERT INTO `Human`(`first_name`, `last_name`, `address_id`) VALUES (%s, %s, %s)', (first_name, last_name, address_id,))
+        mysql.connection.commit()
+        cursor.close()
+        cursor =  mysql.connection.cursor(named_tuple=True)
+        cursor.execute('SELECT id FROM `Human` WHERE id=LAST_INSERT_ID();',)  
+        fetched = cursor.fetchone()
+        cursor.close()
+        print(fetched)
+        cursor =  mysql.connection.cursor(named_tuple=True)
+        cursor.execute('INSERT INTO `Human in Group`(`group_id`, `human_id`) VALUES (%s, %s)', (group_id, fetched[0],))
+        mysql.connection.commit()
+        cursor.close()
+        return jsonify('ok')
+    except:
+        return jsonify('not ok')
+
+@app.route('/task7')
+def task7():
+    start = request.args.get('start')
+    end = request.args.get('end')
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT `Group`.`name` as g_name, `Mountain`.`name` as m_name, `start`, `end` FROM `Climbing` JOIN `Mountain` ON `Mountain`.`id`=`mountain_id` JOIN `Group` ON `Group`.`id`=`group_id` WHERE `start`>%s AND `end`<%s;',(start,end,))  
+    fetched = cursor.fetchall()
+    cursor.close()
+    return jsonify(fetched)

@@ -31,6 +31,16 @@
   <div id="task1table"> 
       
   </div>
+  <br>
+  <br>
+  <h6>Временной промежуток</h6>
+  <input class="form-control" type="text" placeholder="start YYYY-MM-DD" id="start-date">
+  <input class="form-control" type="text" placeholder="end YYYY-MM-DD" id="end-date">
+  <a type="button" id="task7" class="btn btn-primary d-inline">Задание 7</a>
+  <div id="task7table"> 
+      <br>
+  <h3> Добавление нового восхождения </h3>
+</div>
 
 {% elif tablename=='Group'%}
 <table class="table">
@@ -81,6 +91,21 @@
 
   <div id="task4table"> 
   </div>
+ <br>
+ <br>
+ <br>
+  <h3>Добавить нового альпиниста в существующую группу</h3>
+  <input class="form-control" type="text" placeholder="First name" id="first_name">
+    <input class="form-control" type="text" placeholder="Last name" id="last_name">
+    <h6>Адрес</h6>
+    <select class="form-control" id="addresses">
+    
+    </select>
+    <h6>Группа</h6>
+    <select class="form-control" id="groups">
+    </select>
+    <br>
+<a type="button" id="task5" class="btn btn-primary d-inline">Задание 5</a>
 {% elif tablename=='Address'%}
 <table class="table">
     <thead class="thead-dark">

@@ -74,7 +74,7 @@ window.onload = function() {
         let url= locateOrigin + '/task3' + '?' + 'region_id='+ $('#task3selector').val() + '&name=' + $('#task3name').val() + '&height=' + $('#task3height').val() + '&id=' + event.target.dataset.mtn;
         sendRequest(url,'GET', function(){
             if(this.responce==="ok"){
-                showSwal('edited');
+                showSwal('auto-close');
             }else{
                 showSwal('');
             }
@@ -102,6 +102,55 @@ $('#task4').click(function(){
         $('#task4table').append(table);
     })  
 })
+url = locateOrigin + '/getgroups'
+sendRequest(url,'GET', function(){
+    for(i=0;i<this.response.length;i++){
+        $('#groups').append($('<option>', {
+            value: this.response[i][0],
+            text: `${this.response[i][1]}`
+        }));
+    }
+})
+url = locateOrigin + '/getaddresses'
+sendRequest(url,'GET', function(){
+    for(i=0;i<this.response.length;i++){
+        $('#addresses').append($('<option>', {
+            value: this.response[i][0],
+            text: `${this.response[i][2]} ${this.response[i][3]}, ${this.response[i][4]}`
+        }));
+    }
+})
+//// task 5
+$('#task5').click(function(){
+    url = locateOrigin + '/addhumaningroup' + '?' + '&first_name=' + $('#first_name').val() + '&last_name='+ $('#last_name').val() + '&address_id='+ $('#addresses').val() + '&group_id=' + $('#groups').val()
+ sendRequest(url,'GET', function(){
+    if(this.responce=='ok'){
+        showSwal('auto-close');
+    }else{
+        showSwal('');
+    }
+})
+})
+$('#task7').click(function(){
+    let url= locateOrigin + '/task7' + '?' +'start=' + $('#start-date').val() + '&end=' + $('#end-date').val() 
+    sendRequest(url,'GET', function(){
+        console.log(this.response);
+        document.getElementById('task7table').innerHTML='';
+        var table = $('<table>').addClass('table');
+        var thead = $('<thead>').addClass('thead-dark');
+        var row = `<tr><th scope="col">`+ 'Group' +`</th><th scope="col">`+ 'Mountain' +`</th><th scope="col">`+ 'start' +`</th><th scope="col">`+ 'end' +`</th></tr>`
+        thead.append(row);
+        table.append(thead);
+        var tbody = $('<tbody>');
+        for(i=0; i<this.response.length; i++){
+            var row =  `<tr><td>${this.response[i][0]}</td><td>${this.response[i][1]}</td><td>${this.response[i][2]}</td><td>${this.response[i][3]}</td></tr>`
+            console.log(row)
+            tbody.append(row);
+        }
+        table.append(tbody);
+        $('#task7table').append(table);
+    })  
+})
 }
 
 
@@ -119,20 +168,13 @@ function sendRequest(url, method, onloadHandler, params){
     'use strict';
     if (type === 'auto-close') {
     swal({
-    title: 'Добавлено!',
+    title: 'Выполнено!',
     text: 'Это сообщение закроется через 2 секунды.',
     timer: 2000,
     button: false
     })
-    }else if (type==='edited'){
-        swal({
-            title: 'Отредактировано!',
-            text: 'Это сообщение закроется через 2 секунды.',
-            timer: 2000,
-            button: false
-            })
-    }else{
-    swal("Произошла ошибка!");
+    }{
+    swal("Выполнено!");
     }
     }
     
