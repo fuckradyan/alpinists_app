@@ -28,6 +28,9 @@
     
   </table>
   <a type="button" id="task1" class="btn btn-primary d-inline">Задание 1</a>
+  <div id="task1table"> 
+      
+  </div>
 
 {% elif tablename=='Group'%}
 <table class="table">
@@ -68,6 +71,7 @@
         {% endfor %}
     </tbody>
   </table>
+  
 {% elif tablename=='Address'%}
 <table class="table">
     <thead class="thead-dark">
@@ -91,6 +95,7 @@
         {% endfor %}
     </tbody>
   </table>
+
 {% elif tablename=='Human in Group'%}
 <table class="table">
     <thead class="thead-dark">
@@ -108,6 +113,7 @@
         {% endfor %}
     </tbody>
   </table>
+
 {% elif tablename=='Mountain'%}
     <table class="table">
         <thead class="thead-dark">
@@ -129,6 +135,7 @@
             {% endfor %}
         </tbody>
     </table>
+
 {% elif tablename=='Country'%}
 <table class="table">
     <thead class="thead-dark">
@@ -146,6 +153,7 @@
         {% endfor %}
     </tbody>
 </table>
+
 {% elif tablename=='Region'%}
 <table class="table">
     <thead class="thead-dark">

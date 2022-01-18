@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
 from mysql_db import MySQL
 import mysql.connector as connector
 app = Flask(__name__)
@@ -121,7 +121,15 @@ def eachtable(tablename):
 
     return render_template('eachtable.html',fetched=fetched,tablename=tablename[0][0])
 
+@app.route('/task1')
+def task1():
 
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT `Mountain`.`name` as mountain, `Group`.`name` as group_name, `Climbing`.`start`, `Climbing`.`end` FROM `Climbing` JOIN `Mountain` ON `Mountain`.id=`Climbing`.`mountain_id` JOIN `Group` ON `Group`.`id` = `Climbing`.`group_id`;')   
+    fetched = cursor.fetchall()
+    cursor.close()
+
+    return jsonify(fetched)
 # def load_roles():
 #     cursor =  mysql.connection.cursor(named_tuple=True)
 #     cursor.execute('SELECT id, name FROM roles;')
