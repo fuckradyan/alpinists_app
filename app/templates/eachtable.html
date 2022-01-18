@@ -1,5 +1,169 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{fetched}}
+<h3> Таблица {{tablename}} </h3>
+<br>
+{% if tablename=='Climbing'%}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">mountain_id</th>
+        <th scope="col">group_id</th>
+        <th scope="col">start</th>
+        <th scope="col">end</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for f in fetched%}
+            <tr>
+                <th scope="row">{{f.id}}</th>
+                <td>{{f.mountain_id}}</td>
+                <td>{{f.group_id}}</td>
+                <td>{{f.start}}</td>
+                <td>{{f.end}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    
+  </table>
+  <a type="button" id="task1" class="btn btn-primary d-inline">Задание 1</a>
+
+{% elif tablename=='Group'%}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for f in fetched%}
+            <tr>
+                <th scope="row">{{f.id}}</th>
+                <td>{{f.name}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% elif tablename=='Human'%}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">first_name</th>
+        <th scope="col">last_name</th>
+        <th scope="col">address_id</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for f in fetched%}
+            <tr>
+                <th scope="row">{{f.id}}</th>
+                <td>{{f.first_name}}</td>
+                <td>{{f.last_name}}</td>
+                <td>{{f.address_id}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% elif tablename=='Address'%}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">region_id</th>
+        <th scope="col">street</th>
+        <th scope="col">building</th>
+        <th scope="col">zip</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for f in fetched%}
+            <tr>
+                <th scope="row">{{f.id}}</th>
+                <td>{{f.region_id}}</td>
+                <td>{{f.street}}</td>
+                <td>{{f.building}}</td>
+                <td>{{f.zip}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% elif tablename=='Human in Group'%}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">group_id</th>
+        <th scope="col">human_id</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for f in fetched%}
+            <tr>
+                <td>{{f.group_id}}</td>
+                <td>{{f.human_id}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% elif tablename=='Mountain'%}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">height</th>
+            <th scope="col">region_id</th>
+        </tr>
+        </thead>
+        <tbody>
+            {%for f in fetched%}
+                <tr>
+                    <td>{{f.id}}</td>
+                    <td>{{f.name}}</td>
+                    <td>{{f.height}}</td>
+                    <td>{{f.region_id}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% elif tablename=='Country'%}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+    </tr>
+    </thead>
+    <tbody>
+        {%for f in fetched%}
+            <tr>
+                <td>{{f.id}}</td>
+                <td>{{f.name}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% elif tablename=='Region'%}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">country_id</th>
+        <th scope="col">name</th>
+    </tr>
+    </thead>
+    <tbody>
+        {%for f in fetched%}
+            <tr>
+                <td>{{f.id}}</td>
+                <td>{{f.country_id}}</td>
+                <td>{{f.name}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif%}
 {% endblock %}

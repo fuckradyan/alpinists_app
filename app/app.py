@@ -114,7 +114,12 @@ def eachtable(tablename):
     cursor.execute('SELECT * FROM '+ '`' + tablename + '`;')   
     fetched = cursor.fetchall()
     cursor.close()
-    return render_template('eachtable.html',fetched=fetched)
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name=%s',(tablename,))
+    tablename = cursor.fetchall()
+    cursor.close()
+
+    return render_template('eachtable.html',fetched=fetched,tablename=tablename[0][0])
 
 
 # def load_roles():

@@ -18,10 +18,10 @@ class MySQL:
     @property    
     def config(self):
         return {
-            # 'user': self.app.config['MYSQL_USER'],
-            # 'password': self.app.config['MYSQL_PASSWORD'],
-            # 'host': self.app.config['MYSQL_HOST'],
-            # 'database': self.app.config['MYSQL_DATABASE']
+            'user': 'std_1230',
+            'password': '12345678',
+            'host': '172.20.128.5',
+            'database': 'std_1230'
  
         }
     
