@@ -71,7 +71,16 @@
         {% endfor %}
     </tbody>
   </table>
-  
+  <br>
+  <br>
+  <h3>Укажите диапазон дат(Формат - YYYY:MM:DD):</h3>
+  <input type="text" class="form-control" placeholder="start YYYY-MM-DD" id="task41"> 
+  <input type="text" class="form-control" placeholder="end YYYY-MM-DD" id="task42">
+  <br>
+  <a type="button" id="task4" class="btn btn-primary d-inline">Задание 4</a>
+
+  <div id="task4table"> 
+  </div>
 {% elif tablename=='Address'%}
 <table class="table">
     <thead class="thead-dark">
@@ -130,12 +139,35 @@
                     <td>{{f.id}}</td>
                     <td>{{f.name}}</td>
                     <td>{{f.height}}</td>
-                    <td>{{f.region_id}}</td>
+                    <td>{{f.region_id}} <button type="button" class="btn btn-primary button-edit" data-mtn="{{f.id}}" data-toggle="modal" data-target="#modal">
+                        edit
+                    </button></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <br>
+    <br>
+    <h4>Добавить вершину</h4>
+    <form name="form">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Название горы</label>
+        <input type="email" class="form-control" id="task2name" placeholder="Everest">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Высота</label>
+        <input type="email" class="form-control" id="task2height" placeholder="10,000">
+    </div>
+    <div class="form-group">
+        <label for="task2selector">Регион</label>
+        <select class="form-control" id="task2selector">
 
+        </select>
+    </div>
+
+    </form>
+    <br>
+    <a type="button" id="task2" class="btn btn-primary d-inline">Задание 2</a>
 {% elif tablename=='Country'%}
 <table class="table">
     <thead class="thead-dark">
@@ -174,4 +206,40 @@
     </tbody>
 </table>
 {% endif%}
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Редактировать гору</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form name="form1">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Название горы</label>
+                    <input type="email" class="form-control" id="task3name" placeholder="Everest">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Высота</label>
+                    <input type="email" class="form-control" id="task3height" placeholder="10,000">
+                </div>
+                <div class="form-group">
+                    <label for="task3selector">Регион</label>
+                    <select class="form-control" id="task3selector">
+            
+                    </select>
+                </div>
+            
+                </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="send-edit">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -10,7 +10,6 @@ mysql = MySQL(app)
 def index():
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-                   TABLE_NAME
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -22,7 +21,7 @@ def index():
     
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-                   TABLE_NAME
+
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -34,7 +33,6 @@ def index():
     
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-                   TABLE_NAME
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -46,7 +44,6 @@ def index():
     
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-                   TABLE_NAME
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -58,7 +55,6 @@ def index():
     
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-                   TABLE_NAME
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -70,7 +66,6 @@ def index():
     
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-                   TABLE_NAME
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -82,7 +77,6 @@ def index():
     
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-                   TABLE_NAME
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -94,7 +88,6 @@ def index():
     
     cursor =  mysql.connection.cursor(named_tuple=True)
     cursor.execute(""" SELECT
-            TABLE_NAME,
            COLUMN_KEY,
            COLUMN_NAME,
            DATA_TYPE,
@@ -129,6 +122,67 @@ def task1():
     fetched = cursor.fetchall()
     cursor.close()
 
+    return jsonify(fetched)
+
+@app.route('/task2selector')
+def task2selector():
+
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT `Region`.`id`, `Region`.`name` as r_name, `Country`.`name` as c_name FROM `Region` JOIN `Country` ON `Country`.`id`=`Region`.`country_id`;')   
+    fetched = cursor.fetchall()
+    cursor.close()
+    return jsonify(fetched)
+
+@app.route('/task2')
+def task2():
+    height = request.args.get('height',type=int)
+    name = request.args.get('name')
+    region_id = request.args.get('region_id',type=int)
+    try:
+        cursor =  mysql.connection.cursor(named_tuple=True)
+        cursor.execute('INSERT INTO `Mountain`(`name`, `height`, `region_id`) VALUES (%s, %s, %s)', (name, height, region_id,))
+        mysql.connection.commit()
+        cursor.close()
+        return jsonify('ok')
+    except:
+        return jsonify('not ok')
+
+@app.route('/searchmtn')
+def searchmtn():
+    mtn_id = request.args.get('id',type=int)
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT * FROM `Mountain` WHERE id=%s;',(mtn_id,))   
+    fetched = cursor.fetchone()
+    cursor.close()
+    return jsonify(fetched)
+@app.route('/task3')
+def task3():
+    height = request.args.get('height',type=int)
+    name = request.args.get('name')
+    region_id = request.args.get('region_id',type=int)
+    id=request.args.get('id',type=int)
+    cursor = mysql.connection.cursor(named_tuple=True)
+    cursor.execute("SELECT * FROM `Climbing` WHERE mountain_id=%s;",(id,))
+    fetched = cursor.fetchall()
+    cursor.close()
+    if len(fetched)==0:
+        cursor = mysql.connection.cursor(named_tuple=True)
+        cursor.execute("UPDATE `Mountain` SET `name`=%s, `height`=%s, `region_id`=%s WHERE id=%s;",(name,height,region_id,id,))
+        mysql.connection.commit()
+        cursor.close()
+        return jsonify('ok')
+    return jsonify('not ok')
+
+@app.route('/task4')
+def task4():
+    start = request.args.get('start')
+    end = request.args.get('end')
+    print(start)
+    print(end)
+    cursor =  mysql.connection.cursor(named_tuple=True)
+    cursor.execute('SELECT DISTINCT `Human`.`first_name`, `Human`.`last_name` FROM `Climbing` JOIN `Human in Group` ON `Climbing`.`group_id` = `Human in Group`.`group_id` JOIN `Human` ON `Human`.`id`= `Human in Group`.`human_id` WHERE `start`>%s AND `end`<%s;',(start,end,))  
+    fetched = cursor.fetchall()
+    cursor.close()
     return jsonify(fetched)
 # def load_roles():
 #     cursor =  mysql.connection.cursor(named_tuple=True)
